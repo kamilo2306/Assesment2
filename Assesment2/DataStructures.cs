@@ -5,12 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Assesment2
-
 {
     public static class DataStructures<T> where T : IComparable<T>
     {
-
-            public class Node<T>
+        public class Node<T>
         {
             public T Data { get; set; }
             public Node<T> Next { get; set; }
@@ -21,6 +19,107 @@ namespace Assesment2
                 Data = data;
             }
         }
+
+        public class SinglyLinkedList<T>
+        {
+            private Node<T> head;
+
+            public void AddAtHead(T data)
+            {
+                var newNode = new Node<T>(data);
+
+                if (head == null)
+                {
+                    head = newNode;
+                }
+                else
+                {
+                    newNode.Next = head;
+                    head = newNode;
+                }
+            }
+
+            public void Traverse()
+            {
+                var current = head;
+
+                while (current != null)
+                {
+                    Console.Write($"{current.Data} -> ");
+                    current = current.Next;
+                }
+
+                Console.WriteLine("null");
+            }
+
+            public void AddAtTail(T data)
+            {
+                var newNode = new Node<T>(data);
+
+                if (head == null)
+                {
+                    head = newNode;
+                }
+                else
+                {
+                    var current = head;
+                    while (current.Next != null)
+                    {
+                        current = current.Next;
+                    }
+
+                    current.Next = newNode;
+                }
+            }
+
+            public void DeleteAtHead()
+            {
+                if (head != null)
+                {
+                    head = head.Next;
+                }
+            }
+
+            public void DeleteAtTail()
+            {
+                if (head == null)
+                {
+                    return;
+                }
+
+                if (head.Next == null)
+                {
+                    // Only one node in the list
+                    head = null;
+                    return;
+                }
+
+                var current = head;
+                while (current.Next.Next != null)
+                {
+                    current = current.Next;
+                }
+
+                current.Next = null;
+            }
+
+            public bool Contains(T data)
+            {
+                var current = head;
+                while (current != null)
+                {
+                    if (EqualityComparer<T>.Default.Equals(current.Data, data))
+                    {
+                        return true;
+                    }
+                    current = current.Next;
+                }
+                return false;
+            }
+        }
+
+
+
 
         public class DoublyLinkedList<T>
         {
@@ -106,6 +205,52 @@ namespace Assesment2
 
                 Console.WriteLine("null");
             }
+
+            public bool Contains(T data)
+            {
+                var current = head;
+                while (current != null)
+                {
+                    if (EqualityComparer<T>.Default.Equals(current.Data, data))
+                    {
+                        return true;
+                    }
+                    current = current.Next;
+                }
+                return false;
+            }
+
+            public void DeleteAtHead()
+            {
+                if (head != null)
+                {
+                    head = head.Next;
+                    if (head != null)
+                    {
+                        head.Previous = null;
+                    }
+                    else
+                    {
+                        tail = null;
+                    }
+                }
+            }
+
+            public void DeleteAtTail()
+            {
+                if (tail != null)
+                {
+                    tail = tail.Previous;
+                    if (tail != null)
+                    {
+                        tail.Next = null;
+                    }
+                    else
+                    {
+                        head = null;
+                    }
+                }
+            }
         }
 
         public class TreeNode<T>
@@ -163,5 +308,5 @@ namespace Assesment2
                 }
             }
         }
-}
+    }
 }

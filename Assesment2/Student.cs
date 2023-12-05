@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Assesment2
 {
-    internal class Student : Person
+    internal class Student : Person, IComparable<Student>
     {
         public int StudentId { get; set; }
         public string Program { get; set; }
@@ -40,7 +37,22 @@ namespace Assesment2
             return $"{base.ToString()}\n{studentDetails}\n{addressDetails}\n{enrollmentDetails}";
         }
 
+        // Override Equals method for equality checks
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
 
+            Student otherStudent = (Student)obj;
+            return StudentId == otherStudent.StudentId &&
+                   Program == otherStudent.Program &&
+                   DateRegistered == otherStudent.DateRegistered;
+            // Add additional checks as needed
+        }
+
+        // Override GetHashCode for consistent hashing
         public override int GetHashCode()
         {
             unchecked
@@ -52,5 +64,11 @@ namespace Assesment2
             }
         }
 
+        // Implement IComparable<Student> for sorting
+        public int CompareTo(Student other)
+        {
+            // Implement the comparison logic based on your requirements
+            return String.Compare(this.Name, other.Name);
+        }
     }
 }

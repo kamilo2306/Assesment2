@@ -4,19 +4,51 @@ using System.Collections.Generic;
 
 namespace Assesment2
 {
-    class Program
+    class Tester
     {
         static void Main()
         {
+
+
+
+            // Data sample object
+            Address address1 = new Address("123 Main St", "Apt 1", "Cityville", "12345", "StateA");
+            Address address2 = new Address("456 Oak St", "Suite 3", "Townsville", "67890", "StateB");
+
+            Student student1 = new Student(1, "Camilo Mahecha", "cmahecha@example.com", "123-456-7890", "Programming", DateTime.Now);
+            student1.AddAddress(address1);
+
+            Student student2 = new Student(2, "Max Smith", "max@example.com", "987-654-3210", "Engineering", DateTime.Now);
+            student2.AddAddress(address2);
+
+            Course course1 = new Course("CS101", "Introduction to Java", 500);
+            Course course2 = new Course("ENG202", "Advanced Diploma", 700);
+
+            Enrollment enrollment1 = new Enrollment(true, DateTime.Now, "A", student1, course1);
+            Enrollment enrollment2 = new Enrollment(true, DateTime.Now, "B", student2, course2);
+
+
+            Console.WriteLine(student1);
+            Console.WriteLine();
+            Console.WriteLine(student2);
+            Console.WriteLine();
+            Console.WriteLine(course1);
+            Console.WriteLine();
+            Console.WriteLine(course2);
+            Console.WriteLine();
+
+
+
+
             // Sorting and Searching
             List<int> numbers = new List<int> { 5, 2, 8, 1, 7, 3 };
             Console.WriteLine("Original List: " + string.Join(", ", numbers));
 
             // Sorting
-            Utility<int>.QuickSortAscending(numbers);
+            SortingUtility<int>.QuickSortAscending(numbers);
             Console.WriteLine("Sorted List (Ascending): " + string.Join(", ", numbers));
 
-            Utility<int>.QuickSortDescending(numbers);
+            SortingUtility<int>.QuickSortDescending(numbers);
             Console.WriteLine("Sorted List (Descending): " + string.Join(", ", numbers));
 
             // Searching
@@ -24,7 +56,7 @@ namespace Assesment2
             bool found = SearchingUtility<int>.BinarySearch(numbers, target);
             Console.WriteLine($"Binary Search: Target {target} found? {found}");
 
-            found = SearchingUtility<int>.LinearSearch(numbers, target);
+            //found = SearchingUtility<int>.LinearSearch(numbers, target);
             Console.WriteLine($"Linear Search: Target {target} found? {found}");
 
             // Doubly Linked List
@@ -53,6 +85,7 @@ namespace Assesment2
             Console.Write("InOrder Traversal of Binary Tree: ");
             binaryTree.InOrderTraversal();
 
+            Console.WriteLine("Press Enter to exit...");
             Console.ReadLine();
         }
     }

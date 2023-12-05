@@ -39,18 +39,19 @@ namespace Assesment2
             return false;
         }
 
-        public static bool LinearSearch(List<T> unsortedList, T target)
+        public static int LinearSearch(List<T> unsortedList, T target)
         {
-            foreach (var item in unsortedList)
+            for (int i = 0; i < unsortedList.Count; i++)
             {
-                if (item.CompareTo(target) == 0)
+                if (unsortedList[i].CompareTo(target) == 0)
                 {
-                    return true;
+                    return i; // Item found, return the index
                 }
             }
 
-            // Target not found
-            return false;
+            // Item not found, return -1
+            return -1;
         }
     }
 }
+
